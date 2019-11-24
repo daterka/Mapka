@@ -5,15 +5,63 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".activities.MainActivity">
 
-    <TextView
+
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:text="MAP"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorMediumTurquise"
+            android:textAlignment="gravity"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="25dp"
+            android:background="@drawable/button_border_2"
+            android:clickable="true"
+            android:onClick="onButtonClickMenu"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/MAP_BUTTON" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SHARE"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorMediumTurquise"
+            android:textAlignment="gravity"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="25dp"
+            android:background="@drawable/button_border_2"
+            android:id="@+id/SHARE_BUTTON"
+            android:clickable="true"
+            android:onClick="onButtonClickMenu"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/HISTORY_BUTTON"
+            app:layout_constraintStart_toEndOf="@+id/MAP_BUTTON"
+            android:layout_marginStart="8dp" android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"/>
+
+    <Button
+            android:layout_width="148dp"
+            android:layout_height="wrap_content"
+            android:text="HISTORY"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:textColor="@color/colorMediumTurquise"
+            android:textAlignment="gravity"
+            android:paddingVertical="15dp"
+            android:paddingHorizontal="21dp"
+            android:background="@drawable/button_border_2"
+            android:clickable="true"
+            android:onClick="onButtonClickMenu"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/HISTORY_BUTTON"
+            android:layout_marginTop="8dp"
             app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

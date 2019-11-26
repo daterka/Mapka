@@ -52,15 +52,4 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-//    public void onButtonClickMenu(View buttonView){
-//        if(buttonView == findViewById(R.id.MAP_BUTTON)){
-//            Toast.makeText(this, "MAP", Toast.LENGTH_SHORT).show();
-//        }
-//        else if(buttonView == findViewById(R.id.SHARE_BUTTON)){
-//            Toast.makeText(this, "SHARE", Toast.LENGTH_SHORT).show();
-//        }
-//        else if(buttonView == findViewById(R.id.HISTORY_BUTTON)){
-//            Toast.makeText(this, "HISTORY", Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }

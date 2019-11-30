@@ -1,11 +1,16 @@
 package com.example.mapka.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.ColorFilter;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -33,7 +38,7 @@ public class HistoryFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
         View rootView = inflater.inflate(R.layout.fragment_history, container, false);
@@ -57,12 +62,10 @@ public class HistoryFragment extends Fragment {
                @Override
                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                    final LocalizationModel item = (LocalizationModel) parent.getItemAtPosition(position);
-                   view.animate().setDuration(10).alpha(0.8f).withEndAction(new Runnable() {
+                   view.animate().setDuration(1000).alpha(0.8f).withEndAction(new Runnable() {
                        @Override
                        public void run() {
-                           Intent intent = new Intent(getContext(), ShareFragment.class);
                            String locationString = item.getName() + " (" + item.getLatitude() + ", " + item.getLongitude() + ")";
-                           //intent.putExtra("shareLocationFromHistory", locationString);
 
                            SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
                            SharedPreferences.Editor editor = pref.edit();
@@ -76,6 +79,7 @@ public class HistoryFragment extends Fragment {
                    });
                }
            });
+
        }
        else{
            final StableAdapter stableAdapter = new StableAdapter(getActivity(), locaplizationHistory);
@@ -106,17 +110,97 @@ public class HistoryFragment extends Fragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, final View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View rootView = inflater.inflate(R.layout.history_list_record, parent, false);
             ImageView iconMap = (ImageView) rootView.findViewById(R.id.icon_map);
-            ImageView iconDelete = (ImageView) rootView.findViewById(R.id.icon_delete);
+            ImageButton iconDelete = (ImageButton) rootView.findViewById(R.id.icon_delete);
             TextView name = (TextView) rootView.findViewById(R.id.firstLine);
             TextView date = (TextView) rootView.findViewById(R.id.secondLine);
 
             name.setText(objects.get(position).getName());
             date.setText(objects.get(position).getDate() + " " + objects.get(position).getTime());
 
+//            iconDelete.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    convertView.animate().setDuration(10).alpha(0.8f).withEndAction(new Runnable() {
+//                        @Override
+//                        public void run() {
+//
+//                            try{
+//                                dataBaseAdapter.open();
+//                                dataBaseAdapter.deleteLocalization(objects.get(position).getId());
+//                                dataBaseAdapter.close();
+//                                objects.remove(position);
+//                                notifyDataSetChanged();
+//                                Log.d("HISTORY_FRAGMENT", "DELETION OF LOCALIZATION SUCCESFULL");
+//                            }catch (Exception e){
+//                                Log.d("HISTORY_FRAGMENT", "DELETION OF LOCALIZATION SUCCESFULL");
+//                            }
+//                            //intent.putExtra("shareLocationFromHistory", locationString);
+//
+//                        }
+//                    });
+//                }
+//            });
+
+            iconDelete.setFocusable(false);
+            iconDelete.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN: {
+                            ImageButton view = (ImageButton ) v;
+                            view.animate().setDuration(1000).alpha(0.3f).withEndAction(new Runnable() {
+                                @Override
+                                public void run() {
+                                    new AlertDialog.Builder(context)
+                                            .setTitle("Delete entry")
+                                            .setMessage("Are you sure you want to delete this entry?")
+
+                                            // Specifying a listener allows you to take an action before dismissing the dialog.
+                                            // The dialog is automatically dismissed when a dialog button is clicked.
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    try{
+                                                        dataBaseAdapter.open();
+                                                        dataBaseAdapter.deleteLocalization(objects.get(position).getId());
+                                                        dataBaseAdapter.close();
+                                                        objects.remove(position);
+                                                        notifyDataSetChanged();
+                                                        Toast.makeText(getContext(), "Location succesfully deleted !", Toast.LENGTH_SHORT).show();
+                                                        Log.d("HISTORY_FRAGMENT", "DELETION OF LOCALIZATION SUCCESFULL");
+                                                    }catch (Exception e){
+                                                        Log.d("HISTORY_FRAGMENT", "DELETION OF LOCALIZATION SUCCESFULL");
+                                                    }
+                                                }
+                                            })
+
+                                            // A null listener allows the button to dismiss the dialog and take no further action.
+                                            .setNegativeButton(android.R.string.no, null)
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .show();
+
+                                }
+                            });
+                            v.invalidate();
+                            break;
+                        }
+                        case MotionEvent.ACTION_UP:
+
+                            convertView.animate().alpha(1.0f);
+
+                        case MotionEvent.ACTION_CANCEL: {
+                            ImageButton view = (ImageButton) v;
+                            view.animate().alpha(1.0f);
+                            view.invalidate();
+                            break;
+                        }
+                    }
+                    return true;
+                }
+            });
             return rootView;
         }
 
@@ -129,5 +213,11 @@ public class HistoryFragment extends Fragment {
         public boolean hasStableIds() {
             return super.hasStableIds();
         }
+
+
+
     }
+
+
+
 }

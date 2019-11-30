@@ -2,11 +2,13 @@ package com.example.mapka.activities;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
@@ -27,16 +29,16 @@ public class WelcomeActivity extends AppCompatActivity {
     private static final int REQUEST_SEND_SMS= 777;
     private static final int REQUEST_READ_CONTACTS= 666;
     private static final int MY_APP_PERMISSIONS_REQUEST= 111;
-
-
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-        setLanguage();
 
         handlePermissions();
+
+        setLanguage();
 
 
     }
@@ -113,16 +115,39 @@ public class WelcomeActivity extends AppCompatActivity {
 
 
     public void setLanguage(){
-        this.switch_button = (Switch) findViewById(R.id.pl_eng_switch);
-        this.switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+        switch_button = (Switch) this.findViewById(R.id.pl_eng_switch);
+
+        pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//        SharedPreferences.Editor editor = pref.edit();
+//        editor.putBoolean("language", true);
+//        editor.apply();
+
+        //TODO reloding language settings
+        if(pref.getBoolean("language", true)){
+            Toast.makeText(this, "PL", Toast.LENGTH_SHORT).show();
+            switch_button.setChecked(true);
+        }
+        else{
+            Toast.makeText(this, "ENG", Toast.LENGTH_SHORT).show();
+            switch_button.setChecked(false);
+        }
+
+        switch_button.refreshDrawableState();
+
+        switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = pref.edit();
                 if(isChecked){
                     Toast.makeText(WelcomeActivity.this, "Wybrano język polski.", Toast.LENGTH_SHORT).show();
+                    editor.putBoolean("language", true);
                 }
                 else{
                     Toast.makeText(WelcomeActivity.this, "English choosen.", Toast.LENGTH_SHORT).show();
+                    editor.putBoolean("language", false);
                 }
+                editor.apply();
             }
         });
     }

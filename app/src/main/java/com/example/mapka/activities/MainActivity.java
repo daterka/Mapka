@@ -1,5 +1,6 @@
 package com.example.mapka.activities;
 
+import android.content.SharedPreferences;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import com.example.mapka.R;
+import com.example.mapka.database.DataBaseAdapter;
 import com.example.mapka.fragments.HistoryFragment;
 import com.example.mapka.fragments.MapFragment;
 import com.example.mapka.fragments.ShareFragment;
@@ -15,12 +17,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+//    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//    SharedPreferences.Editor editor = pref.edit();
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        dataBaseAdapter = new DataBaseAdapter(getApplicationContext());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
 
@@ -51,5 +58,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     };
+
 
 }

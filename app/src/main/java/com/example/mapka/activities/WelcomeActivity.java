@@ -21,6 +21,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     }
 
+
     public void setLanguage(){
         this.switch_button = (Switch) findViewById(R.id.pl_eng_switch);
         this.switch_button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -36,8 +37,12 @@ public class WelcomeActivity extends AppCompatActivity {
         });
     }
 
+
+
+
     public void onButtonClickStart(View view){
         Intent startIntent = new Intent(WelcomeActivity.this, MainActivity.class);
         startActivity(startIntent);
+        finish();
     }
 }

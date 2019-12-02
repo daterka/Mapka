@@ -1,13 +1,11 @@
 package com.example.mapka.activities;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.*;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.IBinder;
 import android.provider.ContactsContract;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -21,11 +19,12 @@ import com.example.mapka.R;
 import com.example.mapka.fragments.HistoryFragment;
 import com.example.mapka.fragments.MapFragment;
 import com.example.mapka.fragments.ShareFragment;
+import com.example.mapka.services.LocalizationService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
-
+    private Intent serviceintent;
 
     private final BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
         @Override
@@ -48,20 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
         this.bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this.navigationItemSelectedListener);
-
-    }
-
-    public void onResume() {
-        super.onResume();
-
+        serviceintent = new Intent(this, LocalizationService.class);
+        startService(serviceintent);
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.BATTERY_LOW");
         registerReceiver(batteryLevelReceiver, filter);
     }
 
-    public void onStop() {
-        super.onStop();
-
+    public void onDestroy() {
+        super.onDestroy();
+        stopService(serviceintent);
         unregisterReceiver(batteryLevelReceiver);
     }
 

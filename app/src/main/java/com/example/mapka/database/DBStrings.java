@@ -22,10 +22,14 @@ public class DBStrings {
     public static final String LOCALIZATION_HISTORY_COLUMN_TIME_OPTIONS = "TEXT NOT NULL";
     public static final String LOCALIZATION_HISTORY_COLUMN_LATITUDE = "latitude";
     public static final int LOCALIZATION_HISTORY_COLUMN_LATITUDE_NO = 3;
-    public static final String LOCALIZATION_HISTORY_COLUMN_LATITUDE_OPTIONS = "NUMBER(10, 10";
+    public static final String LOCALIZATION_HISTORY_COLUMN_LATITUDE_OPTIONS = "TEXT NOT NULL";
     public static final String LOCALIZATION_HISTORY_COLUMN_LONGITUDE = "longitude";
     public static final int LOCALIZATION_HISTORY_COLUMN_LONGITUDE_NO = 4;
-    public static final String LOCALIZATION_HISTORY_COLUMN_LONGITUDE_OPTIONS = "NUMBER(10, 10";
+    public static final String LOCALIZATION_HISTORY_COLUMN_LONGITUDE_OPTIONS = "TEXT NOT NULL";
+    public static final String LOCALIZATION_HISTORY_COLUMN_NAME = "name";
+    public static final int LOCALIZATION_HISTORY_COLUMN_NAME_NO = 5;
+    public static final String LOCALIZATION_HISTORY_COLUMN_NAME_OPTIONS = "TEXT NOT NULL";
+
 
 //    public static final String LOCALIZATION_HISTORY_COLUMN_COUNTRY = "country";
 //    public static final String LOCALIZATION_HISTORY_COLUMN_CITY = "city";
@@ -36,16 +40,18 @@ public class DBStrings {
     //SQL QUERIES
     public static final String DB_CREATE_LOCALIZATION_HISTORY_TABLE =
             "CREATE TABLE " + LOCALIZATION_HISTORY_TABLE_NAME + "( " +
-                    LOCALIZATION_HISTORY_COLUMN_ID + ", "  +
+                    LOCALIZATION_HISTORY_COLUMN_ID + " "  +
                     LOCALIZATION_HISTORY_COLUMN_ID_OPTIONS + ", " +
-                    LOCALIZATION_HISTORY_COLUMN_DATE + ", " +
+                    LOCALIZATION_HISTORY_COLUMN_DATE + " " +
                     LOCALIZATION_HISTORY_COLUMN_DATE_OPTIONS  + ", " +
-                    LOCALIZATION_HISTORY_COLUMN_TIME + ", " +
+                    LOCALIZATION_HISTORY_COLUMN_TIME + " " +
                     LOCALIZATION_HISTORY_COLUMN_TIME_OPTIONS + ", " +
-                    LOCALIZATION_HISTORY_COLUMN_LATITUDE + ", " +
+                    LOCALIZATION_HISTORY_COLUMN_LATITUDE + " " +
                     LOCALIZATION_HISTORY_COLUMN_LATITUDE_OPTIONS + ", " +
-                    LOCALIZATION_HISTORY_COLUMN_LONGITUDE + ", " +
-                    LOCALIZATION_HISTORY_COLUMN_LONGITUDE_OPTIONS + ");";
+                    LOCALIZATION_HISTORY_COLUMN_LONGITUDE + " " +
+                    LOCALIZATION_HISTORY_COLUMN_LONGITUDE_OPTIONS + ", " +
+                    LOCALIZATION_HISTORY_COLUMN_NAME + " " +
+                    LOCALIZATION_HISTORY_COLUMN_NAME_OPTIONS + ");";
 
     public static final String DB_DROP_LOCALIZATION_HISTORY_TABLE = "DROP TABLE IF EXISTS " + LOCALIZATION_HISTORY_TABLE_NAME;
 

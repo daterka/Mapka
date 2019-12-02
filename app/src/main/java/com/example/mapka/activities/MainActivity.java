@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
+import android.content.SharedPreferences;
 import android.view.MenuItem;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import com.example.mapka.R;
+import com.example.mapka.database.DataBaseAdapter;
 import com.example.mapka.fragments.HistoryFragment;
 import com.example.mapka.fragments.MapFragment;
 import com.example.mapka.fragments.ShareFragment;
@@ -25,6 +27,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+//    SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+//    SharedPreferences.Editor editor = pref.edit();
+
 
 
     private final BroadcastReceiver batteryLevelReceiver = new BroadcastReceiver() {
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         requestPermission();
+//        dataBaseAdapter = new DataBaseAdapter(getApplicationContext());
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
 
@@ -97,5 +103,6 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permission_list, 1);
         }
     }
+
 
 }

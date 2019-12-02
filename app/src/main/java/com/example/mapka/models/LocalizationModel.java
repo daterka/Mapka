@@ -6,13 +6,23 @@ public class LocalizationModel {
     private String time;
     private String latitude;
     private String longitude;
+    private String name;
 
-    public LocalizationModel(long id, String date, String time, String latitude, String longitude) {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalizationModel(long id, String date, String time, String latitude, String longitude, String name) {
         this.id = id;
         this.date = date;
         this.time = time;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.name = name;
     }
 
     public long getId() {

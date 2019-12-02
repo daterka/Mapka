@@ -9,7 +9,7 @@
     <string name="SHARE">SHARE</string>
     <string name="WELCOME_TEXT">Welcome in Mapka !</string>
     <string name="DESCRIPTION_TEXT">With Mapka you can check your current localization, share it via sms and log it at anytime!</string>
-    <string name="PL_ENG">PL/ENG</string>
+    <string name="PL_ENG">ENG/PL</string>
     <string name="LOGO">logo</string>
     <string name="Share_localization">Share localization</string>
     <string name="send_sms">Send SMS</string>

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.telephony.SmsManager;
@@ -14,11 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.example.mapka.R;
 import com.example.mapka.activities.MainActivity;
+import com.example.mapka.models.LocalizationModel;
 
 public class ShareFragment extends Fragment {
 
@@ -34,7 +37,14 @@ public class ShareFragment extends Fragment {
 
         mobileno = (EditText) view.findViewById(R.id.number_text);
         sendsms=(Button) view.findViewById(R.id.send_button);
+      
+        //~~~~~~~~~~~~
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+        //TODO try catch
+        String locationString = pref.getString("currentLocation", null);
 
+        shareLocationFromHistory(locationString);
+        //~~~~~~~~~~~~
         sendsms.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -84,5 +94,16 @@ public class ShareFragment extends Fragment {
             }
             cursor.close();
         }
+        //return super.onCreateView(inflater, container, savedInstanceState);
+
+        
+        return inflater.inflate(R.layout.fragment_share, container, false);
     }
+
+
+    public void shareLocationFromHistory(String locationString){
+        Toast.makeText(getActivity(), locationString, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

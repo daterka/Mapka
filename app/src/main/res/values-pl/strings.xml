@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Mapka</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Witaj pusty fragment</string>
+    <string name="START_BUTTON">START</string>
+    <string name="MAP">MAPA</string>
+    <string name="HISTORY">HISTORIA</string>
+    <string name="SHARE">UDOSTĘPNIJ</string>
+    <string name="WELCOME_TEXT">Witaj w Mapce !</string>
+    <string name="DESCRIPTION_TEXT">Z mapką możesz sprawdzać swoją bieżącą lokalizację, udostepniać ją i zapisywać jednym kliknięciem!</string>
+    <string name="PL_ENG">ENG/PL</string>
+    <string name="LOGO">logo</string>
+    <string name="Share_localization">Udostepnij lokalizację</string>
+    <string name="send_sms">Wyślij SMS</string>
+    <string name="phone_number">numer telefonu</string>
+    <string name="choose_contact">Wybierz kontakt</string>
+    <string name="delete_location">Usuń lokalizację</string>
+    <string name="Are_you_sure">Jesteś pewien, że chesz usunąć lokalizację?</string>
+
+
+</resources>

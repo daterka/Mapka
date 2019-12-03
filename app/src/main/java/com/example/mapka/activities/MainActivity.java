@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         this.bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this.navigationItemSelectedListener);
-        serviceintent = new Intent(this, LocalizationService.class);
-        startService(serviceintent);
+//        serviceintent = new Intent(this, LocalizationService.class);
+//        startService(serviceintent);
         IntentFilter filter = new IntentFilter();
         filter.addAction("android.intent.action.BATTERY_LOW");
         registerReceiver(batteryLevelReceiver, filter);

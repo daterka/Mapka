@@ -41,7 +41,7 @@ public class ShareFragment extends Fragment {
         //~~~~~~~~~~~~
         SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
         //TODO try catch
-        String locationString = pref.getString("currentLocation", null);
+        final String locationString = pref.getString("currentLocation", null);
 
         shareLocationFromHistory(locationString);
         //~~~~~~~~~~~~
@@ -50,7 +50,7 @@ public class ShareFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO zastapic message lokalizacja
-                String message="Localization";
+                String message=locationString;
                 try{
                     SmsManager smsmgr = SmsManager.getDefault();
                     smsmgr.sendTextMessage(mobileno.getText().toString(),null, message,null,null);
@@ -97,7 +97,7 @@ public class ShareFragment extends Fragment {
         //return super.onCreateView(inflater, container, savedInstanceState);
 
         
-        return inflater.inflate(R.layout.fragment_share, container, false);
+//        return inflater.inflate(R.layout.fragment_share, container, false);
     }
 
 

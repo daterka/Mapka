@@ -72,8 +72,10 @@ public class HistoryFragment extends Fragment {
                            editor.putString("currentLocation", locationString);
                            editor.apply();
 
-                           FragmentManager fragmentManager = getFragmentManager();
-                           fragmentManager.beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
+//                           FragmentManager fragmentManager = getFragmentManager();
+//                           fragmentManager.beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
+
+                           getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new ShareFragment()).commit();
 
                        }
                    });

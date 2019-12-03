@@ -56,8 +56,13 @@ public class LocalizationService extends Service {
     private void startService()
     {
         //Wykonanie zadania co 5 min, 60000ms = 1 min
-//        timer.scheduleAtFixedRate(new mainTask(), 30000, 15000);
-        timer.scheduleAtFixedRate(new mainTask(), 30000, 600000);
+        timer.scheduleAtFixedRate(new mainTask(), 30000, 1500000);
+//        timer.scheduleAtFixedRate(new mainTask(), 30000, 600000);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return START_NOT_STICKY;
     }
 
     private class mainTask extends TimerTask

@@ -158,8 +158,8 @@ public class HistoryFragment extends Fragment {
                                 @Override
                                 public void run() {
                                     new AlertDialog.Builder(context)
-                                            .setTitle("Delete entry")
-                                            .setMessage("Are you sure you want to delete this entry?")
+                                            .setTitle(R.string.delete_location)
+                                            .setMessage(R.string.Are_you_sure)
 
                                             // Specifying a listener allows you to take an action before dismissing the dialog.
                                             // The dialog is automatically dismissed when a dialog button is clicked.

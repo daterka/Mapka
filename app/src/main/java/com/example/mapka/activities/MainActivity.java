@@ -6,10 +6,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.PersistableBundle;
 import android.provider.ContactsContract;
+import android.util.AttributeSet;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
@@ -36,6 +40,13 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//        serviceintent = new Intent(this, LocalizationService.class);
+//        startService(serviceintent);
+//    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
         requestPermission();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+        }
+
 
         this.bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this.navigationItemSelectedListener);
@@ -54,9 +70,24 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(batteryLevelReceiver, filter);
     }
 
+
+
+//        @Override
+//    protected void onStart() {
+//        super.onStart();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MapFragment()).commit();
+//    }
+
+//    @Override
+//    protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//
+//    }
+
+
     public void onDestroy() {
         super.onDestroy();
-        stopService(serviceintent);
+//        stopService(serviceintent);
         unregisterReceiver(batteryLevelReceiver);
     }
 
